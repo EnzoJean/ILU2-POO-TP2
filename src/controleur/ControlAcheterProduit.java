@@ -15,5 +15,16 @@ public class ControlAcheterProduit {
 		this.controlTrouverEtalVendeur = controlTrouverEtalVendeur;
 	}
 
-	//TODO a completer
+	public String[] listeVendeurs(String produit) {
+		String[] infosEtals = village.donnerEtatMarche();
+		String[] vendeurs = null;
+		int taille = 0;
+		for (int i = 0; i<infosEtals.length; ++i) {
+			if (infosEtals[i].equals(produit)) {
+				vendeurs[taille] = infosEtals[i-1];
+				taille++;
+			}
+		}
+		return vendeurs;
+	}
 }
