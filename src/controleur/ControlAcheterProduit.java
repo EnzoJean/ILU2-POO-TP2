@@ -15,16 +15,20 @@ public class ControlAcheterProduit {
 		this.controlTrouverEtalVendeur = controlTrouverEtalVendeur;
 	}
 
-	public String[] listeVendeurs(String produit) {
-		String[] infosEtals = village.donnerEtatMarche();
-		String[] vendeurs = null;
-		int taille = 0;
-		for (int i = 0; i<infosEtals.length; ++i) {
-			if (infosEtals[i].equals(produit)) {
-				vendeurs[taille] = infosEtals[i-1];
-				taille++;
-			}
-		}
-		return vendeurs;
+	public int acheterProduit(String nomVendeur, int quantite) {
+		return controlTrouverEtalVendeur.trouverEtalVendeur(nomVendeur).acheterProduit(quantite);
 	}
+	
+	public String[] listeVendeurs(String produit) {
+		return village.donnerEtatMarche();
+	}
+	
+	public int qteDisponible(String nomVendeur, int quantite) {
+		return controlTrouverEtalVendeur.trouverEtalVendeur(nomVendeur).getQuantite();
+	}
+
+
+
 }
+
+	
