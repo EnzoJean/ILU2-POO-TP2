@@ -14,7 +14,7 @@ public class BoundaryAcheterProduit {
 
 	public void acheterQte(String nomVendeur, String nomAcheteur, String produit) {
 		System.out.println(
-				nomAcheteur+ " se déplace jusqu'à l'étal du vendeur "+nomVendeur);
+				nomAcheteur+ " se dÃ©place jusqu'Ã© l'Ã©tal du vendeur "+nomVendeur);
 		int quantite = Clavier.entrerEntier("Combien de "+ produit + " voulez-vous acheter ?");
 		int quantiteDisponible = controlAcheterProduit.qteDisponible(nomVendeur, quantite);
 		if(quantiteDisponible == 0) {
@@ -26,12 +26,12 @@ public class BoundaryAcheterProduit {
 			System.out.println(
 					nomAcheteur+" veut acheter "+quantite+" "+produit+
 					", malheureusement "+nomVendeur+ " n'en a plus que "+quantiteDisponible
-					+". "+nomAcheteur+ " achète tout le stock de "+nomVendeur);
+					+". "+nomAcheteur+ " achÃ©te tout le stock de "+nomVendeur);
 			controlAcheterProduit.acheterProduit(nomVendeur, quantiteDisponible);
 		}
 		else {
 			System.out.println(
-					nomAcheteur+" achète "+quantite+" "+produit+" à "+ nomVendeur);
+					nomAcheteur+" achÃ©te "+quantite+" "+produit+" Ã© "+ nomVendeur);
 			controlAcheterProduit.acheterProduit(nomVendeur, quantite);
 		}
 		
@@ -41,34 +41,30 @@ public class BoundaryAcheterProduit {
 	public void acheterProduit(String nomAcheteur) {
 		String produit = Clavier.entrerChaine("Quel produit voulez-vous acheter ?");
 		String [] vendeurs = controlAcheterProduit.listeVendeurs(produit);
+		int tailleTabVendeurs = vendeurs.length;
 		boolean produitExistant = false;
-		for(int i = 0; i<vendeurs.length && produitExistant == false; ++i ) {
-			if (vendeurs[i].equals(produit)) {
-				produitExistant = true;
-			}
-		}
+		if (tailleTabVendeurs != 0)
+			produitExistant = true;
 		if(!produitExistant) {
 			System.out.println(
-					"Désolé, personne ne vend ce produit au marché.");
+					"DÃ©solÃ©, personne ne vend ce produit au marchÃ©.");
 		}
 		else {
 			int choixUtilisateur;
 			do {
-				System.out.println("De quel commerçant voulez-vous acheter des "+produit+" ?");
-				StringBuilder question = new StringBuilder();
-				int indicepar3 = 0;
-				for (int i =0; i<vendeurs.length; i*=3) {
-					indicepar3 = i/3+1;
-					question.append(indicepar3 + " - " + vendeurs[i]+"\n");
+				StringBuilder qui = new StringBuilder();
+				qui.append("De quel commerÃ§ant voulez-vous acheter des "+produit+" ?\n");
+				for (int i =0; i<tailleTabVendeurs; ++i) {
+					qui.append(i+1 + " - " + vendeurs[i]+"\n");
 				}
-				choixUtilisateur = Clavier.entrerEntier(question.toString());
-				if (choixUtilisateur>0 && choixUtilisateur<=vendeurs.length/3) {
+				choixUtilisateur = Clavier.entrerEntier(qui.toString());
+				if (choixUtilisateur>0 && choixUtilisateur<=tailleTabVendeurs) {
 					acheterQte(vendeurs[(choixUtilisateur-1)*3], nomAcheteur, produit);
 				}
 				else 
 					System.out.println(
-							"Vous devez entrer un chiffre entre 1 et "+vendeurs.length/3);
-			} while (choixUtilisateur<1 || choixUtilisateur>vendeurs.length/3);
+							"Vous devez entrer un chiffre entre 1 et "+tailleTabVendeurs);
+			} while (choixUtilisateur<1 || choixUtilisateur>tailleTabVendeurs);
 		}
 	}
 }

@@ -1,5 +1,6 @@
 package controleur;
 
+import personnages.Gaulois;
 import villagegaulois.Village;
 
 public class ControlAcheterProduit {
@@ -20,7 +21,13 @@ public class ControlAcheterProduit {
 	}
 	
 	public String[] listeVendeurs(String produit) {
-		return village.donnerEtatMarche();
+		Gaulois[] tabVendeurs = village.rechercherVendeursProduit(produit);
+		int tailleTab = tabVendeurs.length;
+		String[] nomVendeurs = new String[tailleTab];
+		for(int i= 0; i<tailleTab; ++i) {
+			nomVendeurs[i] = tabVendeurs[i].getNom();
+		}
+		return nomVendeurs;
 	}
 	
 	public int qteDisponible(String nomVendeur, int quantite) {

@@ -1,6 +1,5 @@
 package controleur;
 
-import frontiere.Clavier;
 import villagegaulois.Village;
 
 public class ControlPrendreEtal {
