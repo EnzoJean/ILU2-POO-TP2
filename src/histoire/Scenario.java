@@ -39,7 +39,7 @@ public class Scenario {
 		ControlLibererEtal controlLibererEtal = new ControlLibererEtal(
 				controlTrouverEtalVendeur);
 		ControlAcheterProduit controlAcheterProduit = new ControlAcheterProduit(
-				controlVerifierIdentite, controlTrouverEtalVendeur, village);
+				controlTrouverEtalVendeur, village);
 		ControlAfficherMarche controlAfficherMarche = new ControlAfficherMarche(
 				village);
 

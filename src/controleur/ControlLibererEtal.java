@@ -17,11 +17,11 @@ public class ControlLibererEtal {
 	 * 
 	 * @param produit
 	 * @return donneesEtal est un tableau de chaine contenant
-	 * 		[0] : un boolean indiquant si l'étal est occupé
+	 * 		[0] : un boolean indiquant si l'Ã©tal est occupÃ©
 	 * 		[1] : nom du vendeur
 	 * 		[2] : produit vendu
-	 * 		[3] : quantité de produit à vendre au début du marché
-	 * 		[4] : quantité de produit vendu
+	 * 		[3] : quantitÃ© de produit Ã  vendre au dÃ©but du marchÃ©
+	 * 		[4] : quantitÃ© de produit vendu
 	 */
 	public String[] libererEtal(String nomVendeur) {
 		return controlTrouverEtalVendeur.trouverEtalVendeur(nomVendeur).etatEtal();
