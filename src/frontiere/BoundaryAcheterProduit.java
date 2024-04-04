@@ -16,7 +16,7 @@ public class BoundaryAcheterProduit {
 		System.out.println(
 				nomAcheteur+ " se déplace jusqu'é l'étal du vendeur "+nomVendeur);
 		int quantite = Clavier.entrerEntier("Combien de "+ produit + " voulez-vous acheter ?");
-		int quantiteDisponible = controlAcheterProduit.qteDisponible(nomVendeur, quantite);
+		int quantiteDisponible = controlAcheterProduit.qteDisponible(nomVendeur);
 		if(quantiteDisponible == 0) {
 			System.out.println(
 					nomAcheteur+" veut acheter "+quantite+" "+ produit

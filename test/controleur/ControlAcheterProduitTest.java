@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import personnages.Chef;
+import personnages.Gaulois;
 import villagegaulois.Village;
 
 class ControlAcheterProduitTest {
@@ -22,8 +23,75 @@ class ControlAcheterProduitTest {
 	}
 	
 	@Test
-	void test() {
-		fail("Not yet implemented");
+	void testControlAcheterProduit() {
+		controlTrouverEtalVendeur = new ControlTrouverEtalVendeur(village);
+		ControlAcheterProduit controlAcheterProduit = new ControlAcheterProduit(controlTrouverEtalVendeur, village);
+		assertNotNull(controlAcheterProduit);
 	}
 
+	@Test
+	void testAcheterProduitPile() {
+		Gaulois bonemine = new Gaulois("Bonemine", 10);
+		village.ajouterHabitant(bonemine);
+		village.installerVendeur(bonemine, "fleurs", 10);
+		controlTrouverEtalVendeur = new ControlTrouverEtalVendeur(village);
+		ControlAcheterProduit controlAcheterProduit = new ControlAcheterProduit(controlTrouverEtalVendeur, village);
+		assertTrue(controlAcheterProduit.acheterProduit("Bonemine", 10) == 10);
+	}
+	
+	@Test
+	void testAcheterProduitMoins() {
+		Gaulois bonemine = new Gaulois("Bonemine", 10);
+		village.ajouterHabitant(bonemine);
+		village.installerVendeur(bonemine, "fleurs", 10);
+		controlTrouverEtalVendeur = new ControlTrouverEtalVendeur(village);
+		ControlAcheterProduit controlAcheterProduit = new ControlAcheterProduit(controlTrouverEtalVendeur, village);
+		assertTrue(controlAcheterProduit.acheterProduit("Bonemine", 5) == 5);
+	}
+	
+	@Test
+	void testAcheterProduitPlus() {
+		Gaulois bonemine = new Gaulois("Bonemine", 10);
+		village.ajouterHabitant(bonemine);
+		village.installerVendeur(bonemine, "fleurs", 10);
+		controlTrouverEtalVendeur = new ControlTrouverEtalVendeur(village);
+		ControlAcheterProduit controlAcheterProduit = new ControlAcheterProduit(controlTrouverEtalVendeur, village);
+		assertTrue(controlAcheterProduit.acheterProduit("Bonemine", 100) == 10);
+	}
+	
+	@Test
+	void testAcheterProduit() {
+		controlTrouverEtalVendeur = new ControlTrouverEtalVendeur(village);
+		ControlAcheterProduit controlAcheterProduit = new ControlAcheterProduit(controlTrouverEtalVendeur, village);
+		assertTrue(controlAcheterProduit.acheterProduit("null", 100) == -1);
+	}
+	
+	@Test
+	void testListeVendeurs() {
+		Gaulois bonemine = new Gaulois("Bonemine", 10);
+		village.ajouterHabitant(bonemine);
+		village.installerVendeur(bonemine, "fleurs", 10);
+		controlTrouverEtalVendeur = new ControlTrouverEtalVendeur(village);
+		ControlAcheterProduit controlAcheterProduit = new ControlAcheterProduit(controlTrouverEtalVendeur, village);
+		assertTrue(controlAcheterProduit.listeVendeurs("fleurs")[0].equals("Bonemine"));
+	}
+	
+	@Test
+	void testQteDisponible10() {
+		Gaulois bonemine = new Gaulois("Bonemine", 10);
+		village.ajouterHabitant(bonemine);
+		village.installerVendeur(bonemine, "fleurs", 10);
+		controlTrouverEtalVendeur = new ControlTrouverEtalVendeur(village);
+		ControlAcheterProduit controlAcheterProduit = new ControlAcheterProduit(controlTrouverEtalVendeur, village);
+		assertTrue(controlAcheterProduit.qteDisponible("Bonemine") == 10);
+		controlAcheterProduit.acheterProduit("Bonemine", 10);
+		assertTrue(controlAcheterProduit.qteDisponible("Bonemine") == 0);
+	}
+	
+	@Test
+	void testQteDisponiblenull() {
+		controlTrouverEtalVendeur = new ControlTrouverEtalVendeur(village);
+		ControlAcheterProduit controlAcheterProduit = new ControlAcheterProduit(controlTrouverEtalVendeur, village);
+		assertTrue(controlAcheterProduit.qteDisponible("null") == -1);
+	}
 }
